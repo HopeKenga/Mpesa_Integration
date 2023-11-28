@@ -2,9 +2,9 @@ import base64
 from datetime import datetime
 import requests
 from django.conf import settings
-from .models import MpesaTransaction, B2CTransaction  # Import your Django models here
+from .models import MpesaTransaction, B2CTransaction
 from .mpesa_types import ISTKPush, IB2C, IB2CRequest, IMpesaCallbackData, IMpesaExpressRequest, IRegisterUrlRequest, \
-    IB2CResponse  # Import your types here
+    IB2CResponse
 
 # Utility Functions
 def get_timestamp():
@@ -40,7 +40,7 @@ def stk_push(data: ISTKPush):
     except requests.RequestException as e:
         print(f"Error in stk_push: {e}")
         return str(e)
-#testing
+
 def register_url():
     payload = build_register_url_payload()
     headers = {'Authorization': f'Bearer {get_oauth_token()}'}
@@ -163,7 +163,7 @@ def build_b2c_payload(amount, mpesa_number, remarks, occassion):
     return {
         'OriginatorConversationID': "jkdsjbdcsjk",  # Generate or use a relevant ID
         'InitiatorName': settings.INITIATOR_NAME,
-        'SecurityCredential': "HRm9qDgyN1+koW6/hXYAMRYpMmjehsoW88r3ZLjE8H3oE4JvvTlclvFwVufrYguP2vE1zX5whwMXWod4b59Vnp+sw3+tAiavj0egayV7ThrjvogG6XL4+KN090IrgJdVTTS82P/CDN9zG3NoOdmzUs4x3MghCEeS9zNDBaEf0m3IcdHX28z94SC1Vod2NIe7ZF3pqlx5acJF37yNgMv8Fwhp3HH/pxYcRdYGI1I80qd63DFvH+lvPLUU6qqIRNZi0PLye9cmKRA4BEmssyeMT6YcsyUJ9gNVrFkxpkedaJn8LPbegMHYc8KvKaaBkoXjgKBM9GCcc/EeswOx+BWymg==",  # Use actual security credential
+        'SecurityCredential': "",  # Use actual security credential
         'CommandID': "BusinessPayment",
         'Amount': str(amount),
         'PartyA': settings.MPESA_SHORT_CODE,
